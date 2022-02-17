@@ -25,7 +25,8 @@ public class PostsService {
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
-        posts.update(requestDto.getTitle(), requestDto.getContent());
+//        posts.update(requestDto.getTitle(), requestDto.getContent());
+        posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getFileId());
         return id;
     }
 
@@ -49,4 +50,10 @@ public class PostsService {
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
     }
+//    @Transactional
+//    public static List<Posts> search(String keyword) {
+//        List<Posts> boardList = PostsRepository.findByTitleContaining(keyword);
+//        return boardList;
+//    }
+
 }
